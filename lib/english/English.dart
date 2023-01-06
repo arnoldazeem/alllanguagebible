@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../Ads/adhelper.dart';
+import '../common/ChapterListPage.dart';
 
 const colororange = const Color(0xFFFF8800);
 const colorgrey = const Color(0xFFDADADA);
@@ -89,11 +90,11 @@ class _MyAppState extends State<english> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              /*Navigator.push(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => ChapterListPage(book: data[index])),
-              );*/
+              );
             },
             child: Card(
               color: colorgrey,

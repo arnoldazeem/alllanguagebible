@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'english/English.dart';
+import 'french/french.dart';
+import 'german/german.dart';
 
 class MultiSelect extends StatefulWidget {
   final List<String> items;
@@ -36,16 +38,23 @@ class _MultiSelectState extends State<MultiSelect> {
 
   // this function is called when the Submit button is tapped
   void _submit() {
-    if (_selectedItems == "ENGLISH") {
+    if (_selectedItems == "The Bible") {
       Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => english()),
       );
-    } else if (_selectedItems == "SPANISH") {
+    } else if (_selectedItems == "La Biblia") {
       Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => spanish()),
       );
-    } else if (_selectedItems == "Hymnal") {
-    } else if (_selectedItems == "Prayers") {}
+    } else if (_selectedItems == "La Bible") {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => french()),
+      );
+    } else if (_selectedItems == "Die Bibel") {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => german()),
+      );
+    }
   }
 
   @override

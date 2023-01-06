@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../Ads/adhelper.dart';
+import '../common/ChapterListPage.dart';
 
 const colororange = const Color(0xFFFF8800);
 const colorgrey = const Color(0xFFDADADA);
@@ -25,10 +26,10 @@ class _MyAppState extends State<spanish> {
     super.initState();
     _createBottomBannerAd();
     loadBibleData().then((String d) => {
-      setState(() {
-        data = jsonDecode(d);
-      })
-    });
+          setState(() {
+            data = jsonDecode(d);
+          })
+        });
   }
 
   @override
@@ -83,17 +84,17 @@ class _MyAppState extends State<spanish> {
         padding: const EdgeInsets.all(5.0),
         itemCount: data.length,
         separatorBuilder: (context, index) =>
-        const Divider(height: 5, color: colororange),
+            const Divider(height: 5, color: colororange),
         physics: const ClampingScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              /*Navigator.push(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => ChapterListPage(book: data[index])),
-              );*/
+              );
             },
             child: Card(
               color: colorgrey,

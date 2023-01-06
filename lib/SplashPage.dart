@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(Duration.zero, () => _showMultiSelect());
   }
 
-  final List<String> items = ['ENGLISH', 'SPANISH', 'Hymnal', 'Prayers'];
+  final List<String> items = ['The Bible', 'La Biblia', 'La Bible', 'Die Bibel'];
 
   _showMultiSelect() async {
     // a list of selectable items
