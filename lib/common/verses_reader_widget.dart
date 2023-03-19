@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class VersesReaderWidget extends StatelessWidget {
-  VersesReaderWidget({super.key, required this.verses, this.keyword});
+  const VersesReaderWidget({super.key, required this.verses, this.keyword});
 
   final String? keyword;
   final List<dynamic> verses;

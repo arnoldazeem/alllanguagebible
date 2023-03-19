@@ -17,11 +17,17 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(Duration.zero, () => _showMultiSelect());
   }
 
-  final List<String> items = ['The Bible', 'La Biblia', 'La Bible', 'Die Bibel'];
+  List<Map<String, dynamic>> items = [
+    {'name': 'The Bible', 'code': 'gb'},
+    {'name': 'La Biblia', 'code': 'es'},
+    {'name': 'La Bible',  'code': 'fr'},
+    {'name': 'Die Bibel', 'code': 'de'},
+    {'name': '圣经', 'code': 'cn'},
+  ];
+
 
   _showMultiSelect() async {
     // a list of selectable items
-    List<String> _selectedItems = [];
     // these items can be hard-coded or dynamically fetched from a database/API
     final List<String>? results = await showGeneralDialog(
       barrierDismissible: false,
@@ -44,7 +50,6 @@ class _SplashPageState extends State<SplashPage> {
     // Update UI
     if (results != null) {
       setState(() {
-        _selectedItems = results;
       });
     }
   }
@@ -55,4 +60,6 @@ class _SplashPageState extends State<SplashPage> {
     return const Scaffold(
     );
   }
+
+
 }

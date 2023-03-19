@@ -2,105 +2,83 @@ import 'dart:io';
 
 class AdHelper {
 
-  static String get bannerAdUnitId {
+
+  static String get englishBookBanner{
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
+      return "ca-app-pub-9817298262215349/8037591285";
     } else if (Platform.isIOS) {
-      // ca-app-pub-9817298262215349/6254837068
-      return "ca-app-pub-3940256099942544/2934735716";
+      return "ca-app-pub-9817298262215349/4534031362";
     } else {
       throw new UnsupportedError("Unsupported platform");
     }
   }
 
-  static String get listBannerAdUnitId {
+  static String get bibleChapterBanner{
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
+      return "ca-app-pub-9817298262215349/8744739111";
     } else if (Platform.isIOS) {
-      // ca-app-pub-9817298262215349/8190465762
-      return "ca-app-pub-3940256099942544/2934735716";
-    } else {
-      throw new UnsupportedError("Unsupported platform");
-    }
-  }
-
-  static String get favBannerAdUnitId {
-    if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
-    } else if (Platform.isIOS) {
-      // ca-app-pub-9817298262215349/2118562181
-      return "ca-app-pub-3940256099942544/2934735716";
-    } else {
-      throw new UnsupportedError("Unsupported platform");
-    }
-  }
-
-  static String get bibleBannerAdUnitId {
-    if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
-    } else if (Platform.isIOS) {
-      // ca-app-pub-9817298262215349/7658168632
-      return "ca-app-pub-3940256099942544/2934735716";
+      return "ca-app-pub-9817298262215349/6840059684";
     } else {
       throw new UnsupportedError("Unsupported platform");
     }
   }
 
 
-  static String get bookBannerAdUnitId {
+  static String get bibleVerseBanner{
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
+      return "ca-app-pub-9817298262215349/4261997806";
     } else if (Platform.isIOS) {
-      //  ca-app-pub-9817298262215349/8376902672
-      return "ca-app-pub-3940256099942544/2934735716";
+      return "ca-app-pub-9817298262215349/8891507957";
     } else {
       throw new UnsupportedError("Unsupported platform");
     }
   }
 
-  static String get bibleVerseBannerAdUnitId {
+
+  static String get frenchBookBanner{
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
+      return "ca-app-pub-9817298262215349/7271304529";
     } else if (Platform.isIOS) {
-      //   ca-app-pub-9817298262215349/4748934261
-      return "ca-app-pub-3940256099942544/2934735716";
+      return "ca-app-pub-9817298262215349/5571780861";
     } else {
       throw new UnsupportedError("Unsupported platform");
     }
   }
 
-  static String get dailyReadingBannerAdUnitId {
+
+  static String get germanBookBanner{
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
+      return "ca-app-pub-9817298262215349/1440964167";
     } else if (Platform.isIOS) {
-      //   ca-app-pub-9817298262215349/4391681351
-      return "ca-app-pub-3940256099942544/2934735716";
+      return "ca-app-pub-9817298262215349/5206865070";
     } else {
       throw new UnsupportedError("Unsupported platform");
     }
   }
 
-  static String get prayerListAdUnitId {
+
+  static String get chineseBookBanner{
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
+      return "ca-app-pub-9817298262215349/6501719154";
     } else if (Platform.isIOS) {
-      //   ca-app-pub-9817298262215349/4391681351
-      return "ca-app-pub-3940256099942544/2934735716";
+      return "ca-app-pub-9817298262215349/3482719862";
     } else {
       throw new UnsupportedError("Unsupported platform");
     }
   }
 
-  static String get prayerViewAdUnitId {
+
+  static String get spanishBookBanner{
     if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/6300978111";
+      return "ca-app-pub-9817298262215349/1210111441";
     } else if (Platform.isIOS) {
-      //   ca-app-pub-9817298262215349/7003065071
-      return "ca-app-pub-3940256099942544/2934735716";
+      return "ca-app-pub-9817298262215349/1172800035";
     } else {
       throw new UnsupportedError("Unsupported platform");
     }
   }
+
+
 
 
   static String get bibleSearchViewAdUnitId {
@@ -117,13 +95,5 @@ class AdHelper {
 
 
 
-  static String get interstitialAdUnitId {
-    if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/8691691433";
-    } else if (Platform.isIOS) {
-      return "ca-app-pub-3940256099942544/5135589807";
-    } else {
-      throw new UnsupportedError("Unsupported platform");
-    }
-  }
+
 }

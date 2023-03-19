@@ -1,20 +1,22 @@
 // This widget is reusable
 import 'package:all_language_bible/spanish/spanish.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'chinese/chinese.dart';
 import 'english/English.dart';
 import 'french/french.dart';
 import 'german/german.dart';
+import 'package:flutter_circle_flags_svg/flutter_circle_flags_svg.dart';
 
 class MultiSelect extends StatefulWidget {
-  final List<String> items;
+ // final List<String> items2;
+ final List<Map<String, dynamic>> items;
 
   const MultiSelect({Key? key, required this.items}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MultiSelectState();
 }
+
 
 class _MultiSelectState extends State<MultiSelect> {
   // this variable holds the selected items
@@ -54,6 +56,10 @@ class _MultiSelectState extends State<MultiSelect> {
       Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => german()),
       );
+    }else if (_selectedItems == "圣经") {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => chinese()),
+      );
     }
   }
 
@@ -69,10 +75,17 @@ class _MultiSelectState extends State<MultiSelect> {
         child: ListBody(
           children: widget.items
               .map((item) => CheckboxListTile(
-                    value: _selectedItems.contains(item),
-                    title: Text(item),
-                    controlAffinity: ListTileControlAffinity.leading,
-                    onChanged: (isChecked) => _itemChange(item, isChecked!),
+                    value: _selectedItems.contains(item['name']),
+                    title: Row(
+                      children: [
+                        CircleFlag(item['code'], size: 32),
+                        SizedBox(width: 8.0),
+                        Text(item['name']),
+                      ],
+                    ),
+                    //  title: Text(item),
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    onChanged: (isChecked) => _itemChange(item['name'], isChecked!),
                   ))
               .toList(),
         ),

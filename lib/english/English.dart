@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:all_language_bible/common/bibleSearchPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -65,13 +66,14 @@ class _MyAppState extends State<english> {
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  /*Navigator.push(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (
                               context,
+                              // data is sent here for search
                               ) => BibleSearchPage(datare: data)
-                      ));*/
+                      ));
                 },
                 child: const Icon(
                   Icons.search,
@@ -123,7 +125,7 @@ class _MyAppState extends State<english> {
 
   void _createBottomBannerAd() {
     _bottomBannerAd = BannerAd(
-      adUnitId: AdHelper.bibleBannerAdUnitId,
+      adUnitId: AdHelper.englishBookBanner,
       size: AdSize.banner,
       request: AdRequest(),
       listener: BannerAdListener(

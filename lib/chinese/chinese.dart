@@ -1,20 +1,23 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../Ads/adhelper.dart';
-import 'ChapterReaderPage.dart';
+import '../common/ChapterListPage.dart';
 
-class ChapterListPage extends StatefulWidget {
-  final dynamic book;
-  // const ChapterListPage({Key? key, book}) : super(key: key);
-  // receive data from the FirstScreen as a parameter
-  const ChapterListPage({super.key, required this.book});
+const colororange = const Color(0xFFFF8800);
+const colorgrey = const Color(0xFFDADADA);
 
+class chinese extends StatefulWidget {
   @override
-  _ChapterListPageState createState() => _ChapterListPageState();
+  State<StatefulWidget> createState() => _MyAppState();
 }
 
-class _ChapterListPageState extends State<ChapterListPage> {
-
+class _MyAppState extends State<chinese> {
+  List<dynamic> data = [];
+  String title = 'The Books of the Bible';
   late BannerAd _bottomBannerAd;
   bool _isBottomBannerAdLoaded = false;
 
@@ -22,12 +25,21 @@ class _ChapterListPageState extends State<ChapterListPage> {
   void initState() {
     super.initState();
     _createBottomBannerAd();
+    loadBibleData().then((String d) => {
+      setState(() {
+        data = jsonDecode(d);
+      })
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
     _bottomBannerAd.dispose();
+  }
+
+  Future<String> loadBibleData() async {
+    return await rootBundle.loadString('assets/zh_ncv.json');
   }
 
   @override
@@ -44,48 +56,65 @@ class _ChapterListPageState extends State<ChapterListPage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.book["name"], style: const TextStyle(color: Colors.white)),
+        title: Text(title, style: const TextStyle(color: Colors.white)),
         iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
+        actions: <Widget>[
+          Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  /*Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (
+                              context,
+                              ) => BibleSearchPage(datare: data)
+                      ));*/
+                },
+                child: const Icon(
+                  Icons.search,
+                  size: 26.0,
+                ),
+              )),
+        ],
       ),
       body: ListView.separated(
         padding: const EdgeInsets.all(5.0),
+        itemCount: data.length,
         separatorBuilder: (context, index) =>
-        const Divider(height: 5, color: Color(0xFFDADADA)),
+        const Divider(height: 5, color: colororange),
         physics: const ClampingScrollPhysics(),
         shrinkWrap: true,
-        itemCount: widget.book["chapters"].length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        ChapterReaderPage(book: widget.book, initialChapter: index)),
+                    builder: (context) => ChapterListPage(book: data[index])),
               );
             },
             child: Card(
-                color: const Color(0xFFDADADA),
-                child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.orange[700],
-                      child: Text(
-                        '${index + 1}',
+              color: colorgrey,
+              child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.orange[700],
+                    child: Text(data[index]["abbrev"],
                         style: const TextStyle(
                           fontFamily: 'Montserrat',
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    title: Text('${widget.book["name"]} ${index + 1}',
-                        style: const TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Color(0xFF003366),
-                          fontWeight: FontWeight.bold,
-                        )))),
+                        )),
+                  ),
+                  title: Text(data[index]["name"],
+                      style: const TextStyle(
+                        fontFamily: 'Montserrat',
+                        color: Color(0xFF003366),
+                        fontWeight: FontWeight.bold,
+                      ))),
+            ),
           );
         },
       ),
@@ -94,7 +123,7 @@ class _ChapterListPageState extends State<ChapterListPage> {
 
   void _createBottomBannerAd() {
     _bottomBannerAd = BannerAd(
-      adUnitId: AdHelper.bibleVerseBanner,
+      adUnitId: AdHelper.chineseBookBanner,
       size: AdSize.banner,
       request: AdRequest(),
       listener: BannerAdListener(

@@ -1,11 +1,13 @@
+import 'dart:developer';
+
+import 'package:all_language_bible/common/verses_reader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../Ads/adhelper.dart';
-import 'VersesReaderWidget.dart';
 
-class ChapterReaderPage extends StatefulWidget {
-  const ChapterReaderPage(
+class SearchReaderPage extends StatefulWidget {
+  const SearchReaderPage(
       {Key? key, this.book, required this.initialChapter, this.keyword})
       : super(key: key);
 
@@ -16,23 +18,27 @@ class ChapterReaderPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() =>
-      _ChapterReaderState(this.initialChapter);
+      _SearchReaderState(this.initialChapter);
 }
 
-class _ChapterReaderState extends State<ChapterReaderPage> {
-  _ChapterReaderState(this.chapterIndex);
+class _SearchReaderState extends State<SearchReaderPage> {
+  _SearchReaderState(this.chapterIndex);
 
   int chapterIndex;
   late PageController _pageController;
 
   late BannerAd _bottomBannerAd;
   bool _isBottomBannerAdLoaded = false;
+  List<dynamic> verse = [];
 
   @override
   void initState() {
     super.initState();
     _createBottomBannerAd();
     _pageController = PageController(initialPage: chapterIndex);
+    widget.book["chapters"].forEach((verses) {
+      verse.add(verses);
+    });
   }
 
   @override
@@ -54,35 +60,29 @@ class _ChapterReaderState extends State<ChapterReaderPage> {
           ),
         ),
         appBar: AppBar(
-            title: Text('${widget.book["name"]} ${chapterIndex + 1}',
+            title: Text('${widget.book["name"]} ${chapterIndex}',
                 style: const TextStyle(color: Colors.white)),
             iconTheme: const IconThemeData(
               color: Colors.white, //change your color here
             )),
         body: Container(
-          // for zooming
+            // for zooming
             child: InteractiveViewer(
                 child: PageView(
-                  scrollDirection: Axis.horizontal,
-
-                  children: widget.book["chapters"]
-                      .map<Widget>((verses) =>
-                  // keyword is optional again because of search using same class
-                  VersesReaderWidget(verses: verses, keyword: widget.keyword))
-                      .toList(),
-
-                  onPageChanged: (int index) {
-                    setState(() {
-                      chapterIndex = index;
-                    });
-                  },
-                  controller: _pageController,
-                ))));
+          scrollDirection: Axis.vertical,
+          controller: _pageController,
+          children:  [
+        //       widget.book["chapters"].forEach((verses) {
+        //       verse.add(verses);
+        //       }),
+            VersesReaderWidget(verses: verse, keyword: widget.keyword)
+          ],
+        ))));
   }
 
   void _createBottomBannerAd() {
     _bottomBannerAd = BannerAd(
-      adUnitId: AdHelper.bibleChapterBanner,
+      adUnitId: AdHelper.bibleSearchViewAdUnitId,
       size: AdSize.banner,
       request: AdRequest(),
       listener: BannerAdListener(

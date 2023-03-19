@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../Ads/adhelper.dart';
 import '../common/ChapterListPage.dart';
+import '../common/bibleSearchPage.dart';
 
 const colororange = const Color(0xFFFF8800);
 const colorgrey = const Color(0xFFDADADA);
@@ -65,13 +66,13 @@ class _MyAppState extends State<spanish> {
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  /*Navigator.push(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (
                               context,
                               ) => BibleSearchPage(datare: data)
-                      ));*/
+                      ));
                 },
                 child: const Icon(
                   Icons.search,
@@ -123,7 +124,7 @@ class _MyAppState extends State<spanish> {
 
   void _createBottomBannerAd() {
     _bottomBannerAd = BannerAd(
-      adUnitId: AdHelper.bibleBannerAdUnitId,
+      adUnitId: AdHelper.spanishBookBanner,
       size: AdSize.banner,
       request: AdRequest(),
       listener: BannerAdListener(
