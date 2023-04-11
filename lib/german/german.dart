@@ -8,8 +8,12 @@ import '../Ads/adhelper.dart';
 import '../common/ChapterListPage.dart';
 import '../common/bibleSearchPage.dart';
 
-const colororange = const Color(0xFFFF8800);
+// const coloryellow = const Color(0xFFFFCE00);
+const colorAppbar = const Color(0xFF000000);
+const colorred = const Color(0xFFDD0000);
 const colorgrey = const Color(0xFFDADADA);
+const colororange = Color(0xFFFF8800);
+
 
 class german extends StatefulWidget {
   @override
@@ -47,7 +51,7 @@ class _MyAppState extends State<german> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        color: const Color(0xFFFF8800),
+        color: colorAppbar,
         child: Container(
           height: _bottomBannerAd.size.height.toDouble(),
           width: _bottomBannerAd.size.width.toDouble(),
@@ -58,6 +62,7 @@ class _MyAppState extends State<german> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(title, style: const TextStyle(color: Colors.white)),
+        backgroundColor: colorAppbar,
         iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
@@ -71,7 +76,8 @@ class _MyAppState extends State<german> {
                       MaterialPageRoute(
                           builder: (
                               context,
-                              ) => BibleSearchPage(datare: data)
+                              ) => BibleSearchPage(datare: data, appBarcolor: colorAppbar, bottomBarcolor: colorAppbar,lableColor: colorred)
+
                       ));
                 },
                 child: const Icon(
@@ -94,14 +100,16 @@ class _MyAppState extends State<german> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ChapterListPage(book: data[index])),
+                //    builder: (context) => ChapterListPage(book: data[index])),
+                  builder: (context) => ChapterListPage(book: data[index], appBarcolor: colorAppbar, bottomBarcolor: colorAppbar, lableColor: colorred)),
+
               );
             },
             child: Card(
               color: colorgrey,
               child: ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: Colors.orange[700],
+                    backgroundColor: colorred,
                     child: Text(data[index]["abbrev"],
                         style: const TextStyle(
                           fontFamily: 'Montserrat',

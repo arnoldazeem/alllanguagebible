@@ -6,9 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../Ads/adhelper.dart';
 import '../common/ChapterListPage.dart';
+import '../common/bibleSearchPage.dart';
 
-const colororange = const Color(0xFFFF8800);
+const coloryellow = Color(0xFFFFFF00);
 const colorgrey = const Color(0xFFDADADA);
+const colorAppbar = const Color(0xFFEE1C25);
 
 class chinese extends StatefulWidget {
   @override
@@ -46,7 +48,7 @@ class _MyAppState extends State<chinese> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        color: const Color(0xFFFF8800),
+        color: colorAppbar,
         child: Container(
           height: _bottomBannerAd.size.height.toDouble(),
           width: _bottomBannerAd.size.width.toDouble(),
@@ -57,6 +59,7 @@ class _MyAppState extends State<chinese> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(title, style: const TextStyle(color: Colors.white)),
+        backgroundColor: colorAppbar,
         iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
@@ -65,13 +68,14 @@ class _MyAppState extends State<chinese> {
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  /*Navigator.push(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (
                               context,
-                              ) => BibleSearchPage(datare: data)
-                      ));*/
+                              ) => BibleSearchPage(datare: data, appBarcolor: colorAppbar, bottomBarcolor: colorAppbar, lableColor: colorAppbar)
+
+                      ));
                 },
                 child: const Icon(
                   Icons.search,
@@ -84,7 +88,7 @@ class _MyAppState extends State<chinese> {
         padding: const EdgeInsets.all(5.0),
         itemCount: data.length,
         separatorBuilder: (context, index) =>
-        const Divider(height: 5, color: colororange),
+        const Divider(height: 5, color: coloryellow),
         physics: const ClampingScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
@@ -93,14 +97,15 @@ class _MyAppState extends State<chinese> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ChapterListPage(book: data[index])),
+                 //   builder: (context) => ChapterListPage(book: data[index])),
+                  builder: (context) => ChapterListPage(book: data[index], appBarcolor: colorAppbar, bottomBarcolor: colorAppbar, lableColor: colorAppbar)),
               );
             },
             child: Card(
               color: colorgrey,
               child: ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: Colors.orange[700],
+                    backgroundColor: colorAppbar,
                     child: Text(data[index]["abbrev"],
                         style: const TextStyle(
                           fontFamily: 'Montserrat',

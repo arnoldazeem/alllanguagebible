@@ -7,8 +7,12 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../Ads/adhelper.dart';
 
 class SearchReaderPage extends StatefulWidget {
+  final Color appBarcolor;
+  final Color bottomBarcolor;
+  final Color lableColor;
+
   const SearchReaderPage(
-      {Key? key, this.book, required this.initialChapter, this.keyword})
+      {Key? key, this.book, required this.initialChapter, this.keyword, required this.appBarcolor, required this.bottomBarcolor, required this.lableColor})
       : super(key: key);
 
   // can be null
@@ -52,7 +56,7 @@ class _SearchReaderState extends State<SearchReaderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: BottomAppBar(
-          color: const Color(0xFFFF8800),
+          color: widget.bottomBarcolor,
           child: SizedBox(
             height: _bottomBannerAd.size.height.toDouble(),
             width: _bottomBannerAd.size.width.toDouble(),
@@ -60,6 +64,7 @@ class _SearchReaderState extends State<SearchReaderPage> {
           ),
         ),
         appBar: AppBar(
+            backgroundColor: widget.appBarcolor,
             title: Text('${widget.book["name"]} ${chapterIndex}',
                 style: const TextStyle(color: Colors.white)),
             iconTheme: const IconThemeData(

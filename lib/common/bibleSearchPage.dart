@@ -1,3 +1,4 @@
+import 'package:all_language_bible/chinese/chinese.dart';
 import 'package:all_language_bible/common/search_reader.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -15,12 +16,20 @@ import '../Ads/adhelper.dart';
  */
 
 const colorgray = Color(0xFFDADADA);
-const colororange = Color(0xFFFF8800);
+// const colororange = Color(0xFFFF8800);
 
 class BibleSearchPage extends StatefulWidget {
   final List<dynamic> datare;
+  final Color appBarcolor;
+  final Color bottomBarcolor;
+  final Color lableColor;
 
-  const BibleSearchPage({super.key, required this.datare});
+  const BibleSearchPage(
+      {super.key,
+      required this.datare,
+      required this.appBarcolor,
+      required this.bottomBarcolor,
+      required this.lableColor});
 
   @override
   _BibleSearchPageState createState() => _BibleSearchPageState();
@@ -40,7 +49,6 @@ class _BibleSearchPageState extends State<BibleSearchPage> {
     // TODO: implement initState
     super.initState();
     _createBottomBannerAd();
-
   }
 
   @override
@@ -53,7 +61,7 @@ class _BibleSearchPageState extends State<BibleSearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        color: const Color(0xFFFF8800),
+        color: widget.bottomBarcolor,
         shape: const CircularNotchedRectangle(),
         child: Container(
           margin: const EdgeInsets.only(left: 12.0, right: 12.0),
@@ -92,7 +100,13 @@ class _BibleSearchPageState extends State<BibleSearchPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               decoration: const InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'Bible Verse'),
+                  labelStyle: TextStyle(color: colorAppbar),
+                  border: OutlineInputBorder(),
+                  // when it is focused
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide:  BorderSide(color: colorAppbar),
+                  )
+                  , labelText: 'Bible Verse'),
               onChanged: (value) {
                 keyword = value;
                 setState(() {
@@ -111,7 +125,7 @@ class _BibleSearchPageState extends State<BibleSearchPage> {
               padding: const EdgeInsets.all(5.0),
               itemCount: data?.length ?? 0,
               separatorBuilder: (context, index) =>
-                  const Divider(height: 5, color: colororange),
+                   Divider(height: 5,  color: widget.appBarcolor),
               physics: const ClampingScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
@@ -127,13 +141,13 @@ class _BibleSearchPageState extends State<BibleSearchPage> {
                                     book: data![index],
                                     initialChapter:
                                         int.parse(data![index]['index']),
-                                    keyword: keyword)));
+                                    keyword: keyword, appBarcolor: widget.appBarcolor, bottomBarcolor: widget.bottomBarcolor, lableColor: widget.lableColor)));
                   },
                   child: Card(
                     color: colorgray,
                     child: ListTile(
                       leading: CircleAvatar(
-                        backgroundColor: Colors.orange[700],
+                        backgroundColor: widget.lableColor,
                         child: Text(data![index]["abbrev"],
                             style: const TextStyle(
                               fontFamily: 'Montserrat',

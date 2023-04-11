@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'SplashPage.dart';
 
 // @dart=2.9
-void main() {
+/*void main() {
   // initial mobileAds
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+  runApp(MyApp());
+}*/
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // for the orientation prevention
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  // initial the Ads
   MobileAds.instance.initialize();
   runApp(MyApp());
 }
@@ -17,6 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'AllLanguageBible',
       theme: ThemeData(
         primarySwatch: Colors.orange,

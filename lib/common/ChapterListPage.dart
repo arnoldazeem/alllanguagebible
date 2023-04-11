@@ -1,3 +1,4 @@
+import 'package:all_language_bible/english/English.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../Ads/adhelper.dart';
@@ -5,9 +6,12 @@ import 'ChapterReaderPage.dart';
 
 class ChapterListPage extends StatefulWidget {
   final dynamic book;
+  final Color appBarcolor;
+  final Color bottomBarcolor;
+  final Color lableColor;
   // const ChapterListPage({Key? key, book}) : super(key: key);
   // receive data from the FirstScreen as a parameter
-  const ChapterListPage({super.key, required this.book});
+  const ChapterListPage({super.key, required this.book, required this.appBarcolor, required this.bottomBarcolor, required this.lableColor});
 
   @override
   _ChapterListPageState createState() => _ChapterListPageState();
@@ -34,7 +38,7 @@ class _ChapterListPageState extends State<ChapterListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        color: const Color(0xFFFF8800),
+        color: widget.bottomBarcolor,
         child: Container(
           height: _bottomBannerAd.size.height.toDouble(),
           width: _bottomBannerAd.size.width.toDouble(),
@@ -45,6 +49,7 @@ class _ChapterListPageState extends State<ChapterListPage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.book["name"], style: const TextStyle(color: Colors.white)),
+        backgroundColor: widget.appBarcolor,
         iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
@@ -52,7 +57,7 @@ class _ChapterListPageState extends State<ChapterListPage> {
       body: ListView.separated(
         padding: const EdgeInsets.all(5.0),
         separatorBuilder: (context, index) =>
-        const Divider(height: 5, color: Color(0xFFDADADA)),
+         Divider(height: 5, color: widget.appBarcolor),
         physics: const ClampingScrollPhysics(),
         shrinkWrap: true,
         itemCount: widget.book["chapters"].length,
@@ -63,14 +68,14 @@ class _ChapterListPageState extends State<ChapterListPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        ChapterReaderPage(book: widget.book, initialChapter: index)),
+                        ChapterReaderPage(book: widget.book, initialChapter: index, appBarcolor: widget.appBarcolor, bottomBarcolor: widget.bottomBarcolor)),
               );
             },
             child: Card(
                 color: const Color(0xFFDADADA),
                 child: ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: Colors.orange[700],
+                      backgroundColor: widget.lableColor,
                       child: Text(
                         '${index + 1}',
                         style: const TextStyle(

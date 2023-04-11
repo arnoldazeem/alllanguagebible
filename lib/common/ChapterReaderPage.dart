@@ -5,8 +5,11 @@ import '../Ads/adhelper.dart';
 import 'VersesReaderWidget.dart';
 
 class ChapterReaderPage extends StatefulWidget {
+  final Color appBarcolor;
+  final Color bottomBarcolor;
+
   const ChapterReaderPage(
-      {Key? key, this.book, required this.initialChapter, this.keyword})
+      {Key? key, this.book, required this.initialChapter, this.keyword, required this.appBarcolor, required this.bottomBarcolor})
       : super(key: key);
 
   // can be null
@@ -46,7 +49,7 @@ class _ChapterReaderState extends State<ChapterReaderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: BottomAppBar(
-          color: const Color(0xFFFF8800),
+          color: widget.bottomBarcolor,
           child: SizedBox(
             height: _bottomBannerAd.size.height.toDouble(),
             width: _bottomBannerAd.size.width.toDouble(),
@@ -54,6 +57,7 @@ class _ChapterReaderState extends State<ChapterReaderPage> {
           ),
         ),
         appBar: AppBar(
+            backgroundColor: widget.appBarcolor,
             title: Text('${widget.book["name"]} ${chapterIndex + 1}',
                 style: const TextStyle(color: Colors.white)),
             iconTheme: const IconThemeData(

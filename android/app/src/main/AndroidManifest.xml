@@ -1,7 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.arnoldazeem.all_language_bible">
-   <application
-        android:label="all_language_bible"
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+
+    <application
+        android:label="Lingua Bible"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -18,7 +24,7 @@
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
+              android:resource="@style/LaunchTheme"
               />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
