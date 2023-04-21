@@ -57,8 +57,11 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return const Scaffold(
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: const Scaffold(),
     );
+    // return const Scaffold(
   }
 
 
